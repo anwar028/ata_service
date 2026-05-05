@@ -54,4 +54,19 @@ public class DriverServiceImpl implements DriverService {
 		return "Driver deleted successsfully";
 	}
 
+	@Override
+	public String updateDriver(Integer id, DriverRequestDTO dto) {
+
+		Driver driver = driverRepo.findById(id).orElseThrow(() -> new RuntimeException("Driver not found"));
+
+		driver.setAddress(dto.getAddress());
+		driver.setContactNo(dto.getContactNo());
+		driver.setLicenseNo(dto.getLicenseNo());
+		driver.setName(dto.getName());
+
+		driverRepo.save(driver);
+
+		return "Driver updated successfully";
+	}
+
 }

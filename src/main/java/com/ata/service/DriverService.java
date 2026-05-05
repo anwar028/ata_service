@@ -14,5 +14,8 @@ public interface DriverService {
 	List<Driver> getAllDrivers();
 
 	String deleteDriver(Integer id);
+	
+	String updateDriver(Integer id, DriverRequestDTO dto);
+	
 
 }
