@@ -1,4 +1,4 @@
-package com.ata.service.impl;
+package com.ata.serviceimpl;
 
 import java.util.List;
 
