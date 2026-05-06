@@ -15,7 +15,7 @@ public class Route {
 	private Integer routeId;
 	private String source;
 	private String destination;
-	private Double distance;
-	private String duration;
+	private Double distanceInKm;
+	private Double estimatedTime;
 
 }
