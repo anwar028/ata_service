@@ -1,17 +1,15 @@
 package com.ata.repository;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.ata.entity.Route;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RouteRepository extends JpaRepository<Route, Integer> {
+import java.util.List;
+import java.util.Optional;
 
-	List<Route> findBySource(String source);
+@Repository
+public interface RouteRepository extends JpaRepository<Route, Long> {
+    Optional<Route> findBySourceAndDestination(String source, String destination);
 
-	List<Route> findByDestination(String destination);
-
-	List<Route> findBySourceAndDestination(String source, String destination);
-
+    List<Route> findByStatus(String status);
 }

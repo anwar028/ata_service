@@ -1,22 +1,33 @@
 package com.ata.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+import javax.persistence.*;
+
 @Entity
+@Table(name = "driver")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Driver {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long driverId;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer driverId;
-	private String name;
-	private String address;
-	private String contactNo;
-	private String licenseNo;
+    @Column(nullable = false)
+    private String name;
 
-	
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false, unique = true)
+    private String contactNo;
+
+    @Column(nullable = false, unique = true)
+    private String licenseNo;
+
+    @Column(nullable = false)
+    private String status; // ACTIVE, INACTIVE
 }

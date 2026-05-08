@@ -1,24 +1,43 @@
 package com.ata.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "user")
 @Data
-@Table(name = "USERS")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userId;
-	private String name;
-	private String email;
-	private String mobile;
-	private String password;
-	private String role;
+    @Column(nullable = false)
+    private String name;
 
+    @Column(nullable = false)
+    private LocalDate dateOfBirth;
+
+    @Column(nullable = false)
+    private String gender;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false, unique = true)
+    private String mobileNo;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private LocalDate registrationDate;
+
+    @Column(nullable = false)
+    private String status; // ACTIVE, INACTIVE
 }

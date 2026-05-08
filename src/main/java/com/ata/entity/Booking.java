@@ -1,41 +1,59 @@
 package com.ata.entity;
 
-import java.time.LocalDate;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "booking")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Booking {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer bookingId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bookingId;
 
-	private LocalDate bookingDate;
-	private LocalDate journeyDate;
+    @ManyToOne(fetch = javax.persistence.FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-	private String boardingPoint;
-	private String dropPoint;
-	private Integer noOfPassengers;
-	private Double totalFare;
-	private String bookingStatus;
+    @ManyToOne(fetch = javax.persistence.FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
 
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
+    @ManyToOne(fetch = javax.persistence.FetchType.LAZY)
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
-	@ManyToOne
-	@JoinColumn(name = "vehicle_id")
-	private Vehicle vehicle;
+    @Column(nullable = false)
+    private LocalDateTime bookingDate;
 
-	@ManyToOne
-	@JoinColumn(name = "route_id")
-	private Route route;
+    @Column(nullable = false)
+    private LocalDate journeyDate;
 
+    @Column(nullable = false)
+    private String boardingPoint;
+
+    @Column(nullable = false)
+    private String dropPoint;
+
+    @Column(nullable = false)
+    private Integer numberOfPassengers;
+
+    @Column(nullable = false)
+    private Double fare;
+
+    @Column(nullable = false)
+    private String bookingStatus; // CONFIRMED, CANCELLED, PENDING, COMPLETED
+
+    @Column
+    private LocalDateTime cancellationDate;
+
+    @Column
+    private String cancellationReason;
 }
